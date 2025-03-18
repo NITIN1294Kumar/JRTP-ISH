@@ -18,20 +18,25 @@ public class CitizenAppRegistrationOperationController {
 	@Autowired
 	private ICitizenApplicationRegistrationService registrationService;
 
+	/*
+	 * @PostMapping("/save") public ResponseEntity<String>
+	 * saveCitizenApplication(@RequestBody CitizenAppRegistrationInput inputs) { try
+	 * { // use service int appId =
+	 * registrationService.registerCitizenApplication(inputs); if (appId > 0) {
+	 * return new
+	 * ResponseEntity<String>("Citizen Application is register with the Id::" +
+	 * appId, HttpStatus.CREATED); } else { return new ResponseEntity<String>
+	 * ("invalid SSN or Citizen must belong to California state::" + appId,
+	 * HttpStatus.BAD_REQUEST); } } catch (Exception e) { return new
+	 * ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST); } }
+	 */
+
 	@PostMapping("/save")
-	public ResponseEntity<String> saveCitizenApplication(@RequestBody CitizenAppRegistrationInput inputs) {
-		try {
-			// use service
-			int appId = registrationService.registerCitizenApplication(inputs);
-			if (appId > 0) {
-				return new ResponseEntity<String>("Citizen Application is register with the Id::" + appId,
-						HttpStatus.CREATED);
-			} else {
-				return new ResponseEntity<String>("invalid SSN or Citizen must belong to California state::" + appId,
-						HttpStatus.BAD_REQUEST);
-			}
-		} catch (Exception e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
+	public ResponseEntity<String> saveCitizenApplication(@RequestBody CitizenAppRegistrationInput inputs)
+			throws Exception {
+
+		// use service
+		int appId = registrationService.registerCitizenApplication(inputs);
+		return new ResponseEntity<String>("Citizen Application is register with the Id::" + appId, HttpStatus.CREATED);
 	}
 }
